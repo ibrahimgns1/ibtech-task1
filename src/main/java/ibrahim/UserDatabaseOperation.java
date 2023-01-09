@@ -41,7 +41,6 @@ public class UserDatabaseOperation {
   }
 
 public Customer read(Long id) {
-	// TODO 
-	return null;
+	return getEntity(Customer.class, id);
 }
 }

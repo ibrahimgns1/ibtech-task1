@@ -5,6 +5,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,13 +22,13 @@ public class Customer extends BaseEntity {
   private String email;
 
   @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-  private List<Address> addresses;
+  private List<Address> addresses = new ArrayList<>();
 
   @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-  private List<Phone> phones;
+  private List<Phone> phones = new ArrayList<>();
 
   @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-  private List<Account> accounts;
+  private List<Account> accounts = new ArrayList<>();
 
   public Customer() {}
 
@@ -101,6 +103,18 @@ public class Customer extends BaseEntity {
 
 	  public String getFullName() {
 	    return name + " " + surname;
+	  }
+	  public void addAccount(Account account) {
+		  this.accounts.add(account);
+		  account.setCustomer(this);
+	  }
+	  public void addAddress(Address address) {
+		  this.addresses.add(address);
+		  address.setCustomer(this);
+	  }
+	  public void addPhone(Phone phone) {
+		  this.phones.add(phone);
+		  phone.setCustomer(this);
 	  }
 	}
 
